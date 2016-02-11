@@ -1,6 +1,8 @@
-<ul>
-    <li ng-repeat= "room in roomlist">
-    	<a ng-href="#/rooms/{{room.id}}"> {{room.name}}</a>
-    </li>
-    
-</ul>
+<div>
+	<ul>
+		<label>Chatrooms</label>
+		<li ng-repeat= "room in roomlist">
+			<a ng-href="#/rooms/{{room.id}}"> {{room.name}}</a>
+		</li>
+	</ul>
+</div>

@@ -11,12 +11,8 @@ chatApp.factory("chatResource",
 					console.log('Oli er typpahaus');
 				}
 			},
-
 			getRoomList: function getRoomList(callback){
 				//TODO
 			},
-
-
 		}
-
 	});

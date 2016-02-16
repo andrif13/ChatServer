@@ -100,6 +100,15 @@ io.sockets.on('connection', function (socket) {
 		
 	});
 
+	socket.on('hasjoined', function(room){
+		console.log('-------------------------------------------------')
+		console.log(room);
+		io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
+		socket.emit('updatechat', room, rooms[room].messageHistory);
+		socket.emit('updatetopic', room, rooms[room].topic, socket.username);
+		io.sockets.emit('servermessage', "join", room, socket.username);
+	});
+
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendmsg', function (data) {
 		

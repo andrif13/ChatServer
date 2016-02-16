@@ -2,7 +2,7 @@
 	<ul>
 		<label>Chatrooms</label>
 		<li ng-repeat= "room in roomlist">
-			<a ng-href="#/rooms/{{user}}/{{$index}}"> {{room.topic}}</a>
+			<button ng-click="joinRoom(roomname)">{{room.topic}}</button>
 		</li>
 	</ul>
 </div>

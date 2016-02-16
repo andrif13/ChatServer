@@ -1,14 +1,18 @@
 'use strict';
 
-chatApp.controller("RoomlistController", ["$scope", "$location", "socket", 
-	function ($scope, $location, socket){
-		/*$scope.roomlist = [ {
-		name: "Spjall um Raudrofusafa",
-		id: 1
-	}, {
-		name: "ANDRI",
-		id: 2
-	}];*/
-		$scope.roomlist = socket.emit("rooms");
-		console.log($scope.roomlist);
+chatApp.controller("RoomlistController", 
+	["$scope", "$location", "socket", 
+	function RoomlistController($scope, $location, socket){
+ 
+		socket.emit("rooms");
+
+		var functionToBeCalledWhenRoomlistChanges = function(roomlist){
+			console.log(roomlist);
+			$scope.$apply(function() {
+				$scope.roomlist = roomlist;
+			});
+
+		}
+
+		socket.on("roomlist", functionToBeCalledWhenRoomlistChanges);
 }]);

@@ -1,8 +1,20 @@
-<div>
+<table>
+
+	<thead>
+		<th>
+		Chatrooms Available
+		</th>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat = "romm in roomlist">
+			<td>{{room.name}}</td>
+		</tr>
+	</tbody>
 	<ul>
-		<label>Chatrooms</label>
-		<li ng-repeat= "room in roomlist">
+		<label>Chatrooms Available</label>
+		<li ng-repeat= "room in roomlist" class="list-group-item">
 			<a ng-href="#/rooms/{{room.id}}"> {{room.name}}</a>
 		</li>
 	</ul>
-</div>
+</table>

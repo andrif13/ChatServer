@@ -1,5 +1,5 @@
 
-paiiApp.factory('chatService', function()
+chatApp.factory('chatService', function()
 {
 	var Service = function () {
 		var self = this;

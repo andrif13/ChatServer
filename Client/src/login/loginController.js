@@ -8,8 +8,10 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket",
 
 	$scope.onLogin = function onLogin(path){
 		socket.emit("adduser", $scope.user, function(available, reason){
+			console.log('adduser');
 			if (available){
-				$location.path(path)
+				console.log("rooms/" + $scope.user);
+				$location.path("rooms/" + $scope.user);
 			} else{
 				alert('username ' + $scope.user + ' is taken, pick another');
 			}

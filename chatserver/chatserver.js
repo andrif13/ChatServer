@@ -254,6 +254,7 @@ io.sockets.on('connection', function (socket) {
 
 	//Returns a list of all avaliable rooms.
 	socket.on('rooms', function() {
+		console.log("chatserver roomlist");
 		socket.emit('roomlist', rooms);
 	});
 

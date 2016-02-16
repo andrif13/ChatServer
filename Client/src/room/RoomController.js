@@ -9,8 +9,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket",
 		socket.emit('hasjoined', $scope.roomname);
 
 		socket.on('updateusers', function(room, user, admin){
-			console.log(user);
+			$scope.userlist = _.keys(user);
 		});
-		
-	
+
 }]);

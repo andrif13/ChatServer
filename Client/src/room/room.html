@@ -1,7 +1,12 @@
 <div>
 	<div>
 		<div class="col-xs-6">
-			<label>Chat Rooms</label>
+			<ul style="list-style-type:none">
+				<h1>{{roomname}}</h1>
+				<li ng-repeat= "user in userlist">
+					{{user}}
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>

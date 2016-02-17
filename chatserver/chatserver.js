@@ -100,18 +100,16 @@ io.sockets.on('connection', function (socket) {
 		
 	});
 
-	socket.on('hasjoined', function(room){
-		console.log('-------------------------------------------------')
-		console.log(room);
+	socket.on('hasjoined', function(room_obj){
+		var room = room_obj.room;
 		io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
 		socket.emit('updatechat', room, rooms[room].messageHistory);
-		socket.emit('updatetopic', room, rooms[room].topic, socket.username);
-		io.sockets.emit('servermessage', "join", room, socket.username);
-	});
+		socket.emit('updatetopic', room, rooms[room].topic, socket.username);	});
 
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendmsg', function (data) {
-		
+		console.log('--------------------------------------');
+		console.log(data);
 		var userAllowed = false;
 
 		//Check if user is allowed to send message.
@@ -123,6 +121,8 @@ io.sockets.on('connection', function (socket) {
 		}
 
 		if(userAllowed) {
+			console.log('------------------------')
+			console.log('user allowed');
 			//Update the message history for the room that the user sent the message to.
 			var messageObj = {
 				nick : socket.username,

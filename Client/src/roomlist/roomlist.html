@@ -1,8 +1,10 @@
 <div>
 	<ul>
 		<label>Chatrooms</label>
-		<li ng-repeat= "room in roomlist">
-			<button ng-click="joinRoom(roomname)">{{room.topic}}</button>
+		<li ng-repeat= "room in roomname">
+			<button ng-click="joinRoom(room)">{{room}}</button>
 		</li>
 	</ul>
+
+	<button ng-click="createNewRoom()">Create new room</button>
 </div>

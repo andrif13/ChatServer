@@ -27,12 +27,18 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			});
 		};
 
+		$scope.createNewRoom = function(){
+			console.log('createNewRoom');
+			$location.path("createroom/" + $scope.user);
+		};
+
 		var functionToBeCalledWhenRoomListChanges = function(roomlist){
 			$scope.roomlist = roomlist;
+			console.log("Roomlist:");
+			console.log($scope.roomlist);
 			$scope.roomname = _.keys(roomlist);
+			console.log("Roomnames:");
 			console.log($scope.roomname);
-
-
 		}
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);
 }]);

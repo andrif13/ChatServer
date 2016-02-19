@@ -7,6 +7,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.isAdmin = false;
 		$scope.displaySuccess = false;
 		$scope.adminsInRoom = "";
+		$scope.glued = true;
 
 		var room_obj = {
 			room: $scope.roomname,
@@ -47,6 +48,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			}
 		});
 
+		
 		$scope.sendMessage = function(){
 			if($scope.newmessage == ""){
 			} else {
@@ -58,6 +60,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				socket.emit('sendmsg', data);
 				$scope.newmessage = "";
 			}
+		
 		};
 
 		$scope.kickUser = function(user){
@@ -98,9 +101,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				}
 			})
 		}
-
+		
 		$scope.leaveRoom = function(){
 			socket.emit('partroom', $scope.roomname);
 			$location.path('rooms/' + $scope.currUser);
 		};
+
 }]);

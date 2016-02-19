@@ -15,12 +15,10 @@
 </div>
 
 <div id="wrapper">
-	<div id="chatbox">
-		<table class="table table-striped">
-			<tr ng-repeat="message in messageInRoom">
-				<td>{{message.nick}} : {{message.message}}	</td>
-			</tr>
-		</table>
+	<div id="chatbox" scroll-glue>
+			<ul ng-repeat="message in messageInRoom">
+				<li>{{message.nick}} : {{message.message}}	</li>
+			</ul>
 	</div>
 
 	<form name="message" action="">

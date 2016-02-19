@@ -4,6 +4,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 	function ($scope, $routeParams, socket, $location){
 		$scope.currUser = $routeParams.user;
 		$scope.roomname = $routeParams.id;
+		$scope.glued = true;
 
 		var room_obj = {
 			room: $scope.roomname,
@@ -32,6 +33,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				socket.emit('sendmsg', data);
 				$scope.newmessage = "";
 			}
+		
 		};
 
 

@@ -1,6 +1,6 @@
 #userlist{
 	position: absolute; /*or fixed*/
-    right: 150px;
+    right: 100px;
 }
 
 ul{
@@ -16,6 +16,8 @@ ul{
     height:270px;
     width:730px;
     border:1px solid #ACD8F0;
+    overflow-y: scroll;
+
 }
 
 #wrapper, #loginform {
@@ -25,6 +27,7 @@ ul{
     padding-bottom:25px;
     width:504px; 
 }
+    
 #privatesend{
     position: fixed;
     right: 300px;
@@ -40,4 +43,10 @@ ul{
     background-color: rgb(237, 239, 244);
     width: 300px;
     border: 1px solid rgba(29, 49, 91, .3);
+}
+#leaveroom {
+    position: absolute;
+    top: 450px;
+    left: 50px;
+
 }

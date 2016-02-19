@@ -35,17 +35,22 @@ io.sockets.on('connection', function (socket) {
 
 	//When a user joins a room this processes the request.
 	socket.on('joinroom', function (joinObj, fn) {
+		console.log('-----------------------------------');
+		console.log(joinObj);
 
 		var room = joinObj.room;
+		console.log('-----------------:////////////////////')
+		console.log(room);
 		var pass = joinObj.pass;
 		var accepted = true;
 		var reason;
 
-		//If the room does not exist
+		//If the room does +not exist
 		if(rooms[room] === undefined) {
 			rooms[room] = new Room();
 			//Op the user if he creates the room.
 			rooms[room].ops[socket.username] = socket.username;
+			console.log(socket.username, "--------------ADADADDaAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
 			//If the user wants to password protect the room we set the password.
 			if(pass !== undefined) {
 				rooms[room].setPassword(pass);
@@ -59,7 +64,9 @@ io.sockets.on('connection', function (socket) {
 			
 			//socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 			//io.sockets.emit('servermessage', "join", room, socket.username);
-			io.socket.emit('roomlist', rooms);
+			console.log('------------------------------------------')
+			console.log(rooms);
+			io.sockets.emit('roomlist', rooms);
 			console.log('rooms updated', rooms); // Faum Event strax up
 		}
 		
@@ -179,6 +186,8 @@ io.sockets.on('connection', function (socket) {
 
 	//When a user tries to kick another user this gets performed.
 	socket.on('kick', function (kickObj, fn) {
+		console.log("-----------------------------------------------------------");
+		console.log(kickObj);
 		console.log(socket.username + " kicked " + kickObj.user + " from " + kickObj.room);
 
 		if(rooms[kickObj.room].ops[socket.username] !== undefined) {
@@ -202,7 +211,7 @@ io.sockets.on('connection', function (socket) {
 		console.log(socket.username + " opped " + opObj.user + " from " + opObj.room);
 		if(rooms[opObj.room].ops[socket.username] !== undefined) {
 			//Remove the user from the room roster.
-			delete rooms[opObj.room].users[opObj.user];
+			//delete rooms[opObj.room].users[opObj.user];
 			//Op the user.
 			rooms[opObj.room].ops[opObj.user] = opObj.user;
 			//Broadcast to the room who got opped.

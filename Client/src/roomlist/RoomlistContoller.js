@@ -19,20 +19,39 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 
 		$scope.joinRoom = function(roomname){
 			socket.emit('joinroom', { room: roomname, pass: ''}, function(success, errorMessage){
+				console.log()
 				if(success){
 					console.log('sucessfully joined a room');
 					$location.path("rooms/" + $scope.user + "/" + roomname);
 				}
 				else{
+					if(errorMessage === 'banned'){
+						console.log('you are banned from the room');
+					}
 					console.log('could not connect');
 				}					
 			});
 		};
 
+		$scope.createNewRoom = function(){
+			//console.log('createNewRoom');
+			$location.path("createroom/" + $scope.user);
+		};
+
+		$scope.logOutServer = function(){
+			console.log("logOutServer");
+			socket.emit('disconnect');
+			$location.path("/");
+		};
+
 		var functionToBeCalledWhenRoomListChanges = function(roomlist){
 			$scope.roomlist = roomlist;
+			//console.log("Roomlist:");
+			//console.log($scope.roomlist);
 			$scope.roomname = _.keys(roomlist);
 			console.log($scope.roomname);
+			//console.log("Roomnames:");
+			//console.log($scope.roomname);
 		}
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);
 }]);

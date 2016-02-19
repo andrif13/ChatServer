@@ -25,3 +25,19 @@ ul{
     padding-bottom:25px;
     width:504px; 
 }
+#privatesend{
+    position: fixed;
+    right: 300px;
+    top: 0;
+    background-color: rgb(237, 239, 244);
+    width: 300px;
+    border: 1px solid rgba(29, 49, 91, .3);
+}
+#privateget{
+    position: fixed;
+    right: 300px;
+    top: 0;
+    background-color: rgb(237, 239, 244);
+    width: 300px;
+    border: 1px solid rgba(29, 49, 91, .3);
+}

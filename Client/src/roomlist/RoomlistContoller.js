@@ -15,6 +15,8 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		$scope.roomlist = [];
 		$scope.user = $routeParams.user;
 
+
+
 		$scope.joinRoom = function(roomname){
 			socket.emit('joinroom', { room: roomname, pass: ''}, function(success, errorMessage){
 				if(success){
@@ -23,7 +25,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 				}
 				else{
 					console.log('could not connect');
-				}
+				}					
 			});
 		};
 
@@ -31,8 +33,6 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			$scope.roomlist = roomlist;
 			$scope.roomname = _.keys(roomlist);
 			console.log($scope.roomname);
-
-
 		}
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);
 }]);

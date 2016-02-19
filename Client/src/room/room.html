@@ -6,8 +6,7 @@
 
 <div id="userlist">
 	<ul>
-		<li ng-repeat="user in userlist">{{user}}
-		<button class ="btn btn-primary" ng-click="kickUser()" type="button"></button></li>
+		<li ng-repeat="user in userlist">{{user}}</li>
 	</ul>
 </div>
 
@@ -24,4 +23,8 @@
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
 		<button class="btn btn-primary" ng-click="sendMessage()" type="button">Send</button> 
 	</form>
+</div>
+
+<div id="leaveroom">
+	<button ng-click="leaveRoom()" type="button">Leave Room</button>
 </div>

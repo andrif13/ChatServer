@@ -14,6 +14,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			console.log("messages: " + messages);
 			$scope.messageInRoom = messages;
 		});
+
 		socket.on('updateusers', function(room, user, admin){
 			$scope.userlist = _.keys(user);
 			console.log($scope.userlist);
@@ -33,5 +34,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			}
 		};
 
+
+		$scope.leaveRoom = function(){
+			socket.emit('partroom', $scope.roomname);
+			$location.path('rooms/' + $scope.currUser);
+		};
 
 }]);

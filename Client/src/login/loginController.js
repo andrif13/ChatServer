@@ -1,12 +1,14 @@
 "use strict";
 
-chatApp.controller("LoginController", ["$scope", "$location", "socket", 
-	function ($scope, $location, socket){
-
+chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedIn",
+	function ($scope, $location, socket, LoggedIn){
+	console.log('Loggedin:', LoggedIn);
 	$scope.user = "";
 	$scope.errorMessage = "";
 
 	$scope.onLogin = function onLogin(path){
+		LoggedIn = $scope.user;
+		console.log('Loggedin: ',LoggedIn);
 		socket.emit("adduser", $scope.user, function(available, reason){
 			console.log('adduser');
 			if (available){
@@ -18,3 +20,4 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket",
 		});
 	};
 }]);
+

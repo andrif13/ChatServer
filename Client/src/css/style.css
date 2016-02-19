@@ -25,3 +25,9 @@ ul{
     padding-bottom:25px;
     width:504px; 
 }
+
+#leaveroom {
+    position: absolute;
+    top: 450px;
+    left: 50px;
+}

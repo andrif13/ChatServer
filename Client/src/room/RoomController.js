@@ -1,7 +1,7 @@
 'use strict';
 
-chatApp.controller("RoomController", ["$scope", "$routeParams", "socket",
-	function ($scope, $routeParams, socket){
+chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$location",
+	function ($scope, $routeParams, socket, $location){
 		$scope.currUser = $routeParams.user;
 		$scope.roomname = $routeParams.id;
 
@@ -14,6 +14,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket",
 			console.log("messages: " + messages);
 			$scope.messageInRoom = messages;
 		});
+
 		socket.on('updateusers', function(room, user, admin){
 			$scope.userlist = _.keys(user);
 			console.log($scope.userlist);
@@ -30,5 +31,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket",
 				socket.emit('sendmsg', data);
 				$scope.newmessage = "";
 			}
+		};
+
+		$scope.leaveRoom = function(){
+			socket.emit('partroom', $scope.roomname);
+			$location.path('rooms/' + $scope.currUser);
 		};
 }]);

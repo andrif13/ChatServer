@@ -20,4 +20,3 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedI
 		});
 	};
 }]);
-

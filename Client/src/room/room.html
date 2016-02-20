@@ -1,4 +1,4 @@
-<div id="room">
+<div ng-include="'src/navBar/navView.html'"></div>
 
 <div class="row">
 	<div class="col-md-8">
@@ -7,15 +7,20 @@
 </div>
 
 <div id="userlist">
-	<ul>
-		<li ng-repeat="user in userlist">{{user}}
-			<button ng-click="kickUser(user)" ng-show="isAdmin">kick</button> 
-			<button ng-click="banUser(user)" ng-show="isAdmin">ban</button>
-			<button ng-click="opUser(user)" ng-show="isAdmin">op</button>
-			<button type="button" ng-click="privateMessage(user)">PM</button>
-		</li>
-	</ul>
+<ul>
+    <li uib-dropdown on-toggle="toggled(open)" href id="simple-dropdown" ng-repeat="user in userlist" uib-dropdown-toggle>
+        {{user}}
+      <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+        <li><a ng-click="kickUser(user)" ng-show="isAdmin">kick</a></li>
+    	<li><a ng-click="banUser(user)" ng-show="isAdmin">ban</a></li>
+   		<li><a ng-click="opUser(user)" ng-show="isAdmin">op</a></li>
+   		<li><a type="button" ng-click="privateMessage(user)">PM></a></li>
+      </ul>
+    </li>
+</ul>
 </div>
+
+
 
 <div id="wrapper">
 	<div id="chatbox" scroll-glue>
@@ -48,11 +53,13 @@
 	<form name="message" action="">
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
 		<button class="btn btn-primary" ng-click="sendMessage()" type="button">Send</button> 
+
 	</form>
 </div>
 
+
 <div id="leaveroom">
-	<button ng-click="leaveRoom()" type="button">Leave Room</button>
+	<button ng-click="leaveRoom()" class="btn btn-danger" type="button">Leave Room</button>
 </div>
 
 <div id="roomsettingsButton">	
@@ -70,4 +77,3 @@
 	{{ successMessage }}
 </div>
 
-</div>

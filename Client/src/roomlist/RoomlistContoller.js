@@ -40,11 +40,6 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			$location.path("createroom/" + $scope.user);
 		};
 
-		$scope.logOutServer = function(){
-			console.log("logOutServer");
-			socket.emit('disconnect');
-			$location.path("/");
-		};
 
 		var functionToBeCalledWhenRoomListChanges = function(roomlist){
 			console.log('-----------------------------');

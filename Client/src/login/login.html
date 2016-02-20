@@ -1,14 +1,14 @@
-<div>
-	<div>
-		<div class="col-xs-6">
-			<label>Username</label>
-			<input type="text" ng-model="user" placeholder="Username"/>{{errorMessage}}
-		</div>
+<div id="logincontr">
+
+	<div class="col-xs-8">
+			<input type="text" ng-model="user" class="form-control" placeholder="Enter Username"/>
+	</div>
+	<div id= "joinButton">
+		<button type="button" class="btn btn-primary" ng-click="onLogin('/rooms/:user')">Join server</button>
 	</div>
 
-	<div class="row">
-		<div class="col-xs-12">
-			<button ng-click="onLogin('/rooms/:user')">Join server</button>
-		</div>
+	<div>
+		{{errorMessage}}
 	</div>
 </div>
+

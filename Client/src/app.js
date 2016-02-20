@@ -1,6 +1,6 @@
 "use strict";
 
-var chatApp = angular.module("chatApp", ["ngRoute"])
+var chatApp = angular.module("chatApp", ["ngRoute" ,'ui.bootstrap'])
 .config(['$routeProvider',
 	function ($routeProvider){
 		$routeProvider.when("/", {

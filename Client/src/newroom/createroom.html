@@ -1,19 +1,24 @@
-<div>
-	<h3>Create a new chatroom</h3>
-</div>
-<div>
+
+
+
+<div id="newRoom">
 	<div>
-		<label for="newRoomName" class="control-label">Room name</label>
-		<input type="text" ng-model="newRoomName" focus="{{newRoomName}}"/>
-		<label>Room password (optional)</label>
-		<input type="password" ng-model="newRoomPassword"/>
-		<br>
-		<label>Room Topic</label>
-		<input type="text" ng-model="newtopic"/>
-		<button ng-click="create()">Create</button>
+		<h3>Create a new chatroom</h3>
+	</div>
+	<div class="col-xs-8">
+			<input type="text" ng-model="newRoomName" class="form-control" placeholder="Enter Name of Room"/>
+	</div>
+	<div class="col-xs-8">
+		<input type="password" ng-model="newRoomPassword" class="form-control" placeholder="Room password (optional)"/>
+	</div>
+	<div class="col-xs-8">
+		<input type="text" ng-model="newtopic" class="form-control" placeholder="Room Topic"/>
 	</div>
 
 	<div class="alert alert-danger" role="alert" ng-show="displayError">
 		{{ errorMessage }}
+	</div>
+	<div id="newChat">
+		<button class="btn btn-primary" ng-click="create()">Create</button>
 	</div>
 </div>

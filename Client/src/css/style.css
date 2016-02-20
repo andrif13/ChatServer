@@ -33,3 +33,15 @@ ul{
     top: 450px;
     left: 50px;
 }
+
+#roomsettingsButton{
+    position: absolute;
+    top: 450px;
+    left: 150px; 
+}
+
+#roomsettings{
+    position: absolute;
+    top: 550px;
+    left: 50px;  
+}

@@ -9,7 +9,7 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedI
 
 	$scope.onLogin = function onLogin(path){
 		LoggedIn = $scope.user;
-		console.log('Loggedin: ',LoggedIn);
+		//console.log('Loggedin: ',LoggedIn);
 		if($scope.user === "") {
 			$scope.errorMessage = "You have to put some name in the field";
 		}else {
@@ -22,8 +22,6 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedI
 				$scope.errorMessage = "This User is already taken choose another one !"
 			}
 		});
-
 		}
-		
 	};
 }]);

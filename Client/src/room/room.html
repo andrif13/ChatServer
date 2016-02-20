@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-8">
-		<h2 class="text-center">Welcome to {{ roomname }}</h2>
+		<h2 class="text-center">Welcome to {{ roomname }}, were {{topic}} are!!</h2>
 	</div>
 </div>
 
@@ -29,6 +29,17 @@
 
 <div id="leaveroom">
 	<button ng-click="leaveRoom()" type="button">Leave Room</button>
+</div>
+
+<div id="roomsettingsButton">	
+	<button ng-click="roomSettings()" ng-show="isAdmin" type="button">Room Settings</button>
+</div>
+
+<div id="roomsettings" ng-show="show">
+	Room Topic: <input type="text" ng-model="newTopic" placeholder="Topic"/>
+	Room Password <input type="text" ng-model="roomPassword" placeholder="Password"/>
+	<button ng-click="removePassword()">Remove Password</button>
+	<button ng-click="submit()">Submit</button>
 </div>
 
 <div class="alert alert-success" role="alert" ng-show="displaySuccess">

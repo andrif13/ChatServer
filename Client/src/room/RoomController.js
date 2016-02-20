@@ -8,6 +8,11 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.displaySuccess = false;
 		$scope.adminsInRoom = "";
 		$scope.glued = true;
+		$scope.show = false;
+		$scope.newTopic = "";
+		$scope.topic = "";
+		$scope.roomPassword = "";
+		var counter = 1;
 
 		var room_obj = {
 			room: $scope.roomname,
@@ -47,8 +52,15 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				$location.path("rooms/" + $scope.currUser);
 			}
 		});
-
 		
+		socket.on('updatetopic', function (room, topic, user) {
+			$scope.topic = topic;
+			console.log("UpdateTopic");
+			console.log('Room: ',room);
+			console.log('Topic: ', topic);
+			console.log('User: ', user);
+	});
+
 		$scope.sendMessage = function(){
 			if($scope.newmessage == ""){
 			} else {
@@ -62,7 +74,14 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			}
 		
 		};
-
+		$scope.roomSettings = function(){
+			counter++;
+			if(counter%2===0){
+				$scope.show = true;
+			} else {
+				$scope.show = false;
+			}
+		}
 		$scope.kickUser = function(user){
 			//console.log('User i kickUser: ', user);
 			var kickObj = {
@@ -107,4 +126,56 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			$location.path('rooms/' + $scope.currUser);
 		};
 
+		$scope.submit = function(){
+			console.log("Topic: ", $scope.newTopic);
+			console.log("Password: ", $scope.roomPassword);
+			if($scope.newTopic === ""){
+				console.log('roomtopic has to have string');
+			} else {
+				var topicObj = {
+					room: $scope.roomname,
+					topic: $scope.newTopic
+				};
+				socket.emit('settopic', topicObj, function(success){
+					if(success){
+						console.log('Successfully changed topic');
+						$scope.newTopic = "";
+					} else {
+						console.log('Unsuccessfully changed topic');
+
+					}
+				});
+			}
+			if($scope.roomPassword === ""){
+				console.log("password is empty");
+			} else {
+				var passObj = {
+					room: $scope.roomname,
+					password: $scope.roomPassword
+				};
+				console.log('PASSWORD OBJECT');
+				console.log(passObj);
+				socket.emit('setpassword', passObj, function(sucess){
+					if(sucess){
+						console.log('Successfully changed password');
+						$scope.roomPassword = "";
+					} else {
+						console.log('Unsuccessfully changed password');
+					}
+				})
+			}
+		};
+
+		$scope.removePassword = function (){
+			var removePasswordObj = {
+				room: $scope.roomname
+			};
+			socket.emit('removepassword', removePasswordObj, function(success){
+				if(success){
+					console.log('Successfully removed password');
+				} else {
+					console.log('Unsuccessfully removed password');
+				}
+			})
+		};
 }]);

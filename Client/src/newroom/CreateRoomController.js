@@ -19,7 +19,7 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 				console.log('inni socket.emit');
 				if(available){
 					console.log('sucessfully created a new room');
-					$location.path("/rooms/" + $scope.user);
+					$location.path("/rooms/" + $scope.user + "/" + $scope.newRoomName);
 				} else {
 					console.log('unsucessfully created a new room :( :( :(');
 				}

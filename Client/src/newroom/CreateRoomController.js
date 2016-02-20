@@ -7,14 +7,14 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 		$scope.newtopic = "";
 		$scope.user = $routeParams.user;
 		$scope.create = function(){
-			console.log('create');
+			/*console.log('create');
 			console.log($scope.newtopic);
 			console.log($scope.newroompassword);
 			console.log($scope.newroomname);
-			console.log($scope.user);
+			console.log($scope.user);*/
 
 			var newRoom = {room: $scope.newRoomName, pass: $scope.newRoomPassword};
-			console.log(newRoom);
+			//console.log(newRoom);
 			socket.emit('joinroom', newRoom, function (available, error){
 				console.log('inni socket.emit');
 				if(available){

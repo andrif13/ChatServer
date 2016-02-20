@@ -13,6 +13,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.topic = "";
 		$scope.roomPassword = "";
 		var counter = 1;
+		$scope.isPrv = false;
+		$scope.privmessage = "";
+		$scope.GetPrv = false;
+
 
 		var room_obj = {
 			room: $scope.roomname,
@@ -25,6 +29,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			$scope.messageInRoom = messages;
 
 		});
+
 
 		socket.on('updateusers', function(room, user, admins){
 			$scope.userlist = _.keys(user);
@@ -45,7 +50,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				$scope.sucessMessage = "You have been kicked";
 				$location.path("rooms/" + $scope.currUser);
 			}
-		})
+		});
 
 		socket.on('banned', function(room, userBanned, banner){
 			if($routeParams.user === userBanned && room === $scope.roomname && $routeParams.user !== banner){
@@ -59,7 +64,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			console.log('Room: ',room);
 			console.log('Topic: ', topic);
 			console.log('User: ', user);
-	});
+		});
 
 		$scope.sendMessage = function(){
 			if($scope.newmessage == ""){
@@ -82,6 +87,44 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				$scope.show = false;
 			}
 		}
+		socket.on('recv_privatemsg', function (sender, rMessage){
+			$scope.GetPrv = true;
+			$scope.recvMessage = rMessage;
+			$scope.fromUser = sender;
+			console.log("RECIVEDMESSAGE", rMessage);
+		});
+		
+		$scope.dismiss = function(){
+			$scope.GetPrv = false;
+		};
+		
+		$scope.privateMessage = function(rUser){
+			$scope.GetPrv = false;
+			$scope.recvUser = rUser;
+			console.log(rUser + "   Senda private");
+			if(rUser == $scope.currUser){
+			}
+			else{
+				console.log("inní drasli");
+				$scope.isPrv = true;
+				$scope.sendPrvMessage = function(){
+					if($scope.privmessage == ""){
+						console.log("auttt");
+					}
+					else{
+						console.log("hello");
+							var data = {
+								nick : rUser,
+								message : $scope.privmessage
+							};
+							console.log(data);
+							socket.emit('privatemsg', data)
+							$scope.isPrv = false;
+					}
+				}
+				
+			}
+		};
 		$scope.kickUser = function(user){
 			//console.log('User i kickUser: ', user);
 			var kickObj = {
@@ -118,8 +161,8 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				if(success){
 					console.log(user, " was opped!!");
 				}
-			})
-		}
+			});
+		};
 		
 		$scope.leaveRoom = function(){
 			socket.emit('partroom', $scope.roomname);

@@ -1,3 +1,5 @@
+<div id="room">
+
 <div class="row">
 	<div class="col-md-8">
 		<h2 class="text-center">Welcome to {{ roomname }}, were {{topic}} are!!</h2>
@@ -10,6 +12,7 @@
 			<button ng-click="kickUser(user)" ng-show="isAdmin">kick</button> 
 			<button ng-click="banUser(user)" ng-show="isAdmin">ban</button>
 			<button ng-click="opUser(user)" ng-show="isAdmin">op</button>
+			<button type="button" ng-click="privateMessage(user)">PM</button>
 		</li>
 	</ul>
 </div>
@@ -20,6 +23,27 @@
 				<li>{{message.nick}} : {{message.message}}	</li>
 			</ul>
 	</div>
+<div id = "privatesend" ng-show = "isPrv">
+	<div class ="row">
+		<div>
+			<h3 class="text-center"> Sending private message to {{ recvUser }}</h3>
+		</div>
+		<input name ="privmsg" type="text" id= "privmessage" ng-model="privmessage" focus=" {{privmsg}} "/>
+		<button type="button" class = "btn btn-primary" ng-click="sendPrvMessage()" > Send</button>
+	</div>
+</div>
+<div id = "privateget" ng-show = "GetPrv">
+		<div>
+			<h3 class="text-center"> You got a  private message from {{ fromUser }}</h3>
+		</div>
+		<div>
+			{{recvMessage}}
+		</div>
+		<div>
+			<button type="button" class = "btn btn-primary" ng-click="privateMessage(fromUser) ">Respond</button>
+			<button type="button" class = "btn btn-primary" ng-click ="dismiss()"> Dismiss</button>
+		</div>
+</div>
 
 	<form name="message" action="">
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
@@ -44,4 +68,6 @@
 
 <div class="alert alert-success" role="alert" ng-show="displaySuccess">
 	{{ successMessage }}
+</div>
+
 </div>

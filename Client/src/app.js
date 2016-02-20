@@ -1,6 +1,6 @@
 "use strict";
 
-var chatApp = angular.module("chatApp", ["ngRoute"])
+var chatApp = angular.module("chatApp", ["ngRoute" ,'ui.bootstrap'])
 .config(['$routeProvider',
 	function ($routeProvider){
 		$routeProvider.when("/", {
@@ -9,9 +9,6 @@ var chatApp = angular.module("chatApp", ["ngRoute"])
 		}).when("/rooms/:user", {
 			templateUrl: "/src/roomlist/roomlist.html",
 			controller: "RoomlistController",
-			/*resolve: {
-				factory: checkAuthOfUser
-			}*/
 		}).when("/rooms/:user/:id", {
 			templateUrl: "/src/room/room.html",
 			controller: "RoomController"

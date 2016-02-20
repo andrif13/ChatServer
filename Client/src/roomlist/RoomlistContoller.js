@@ -15,6 +15,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		$scope.roomlist = [];
 		$scope.user = $routeParams.user;
 
+
 		$scope.joinRoom = function(roomname){
 			var pass = prompt("Enter room password");
 			console.log(pass);
@@ -30,7 +31,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 						console.log('wrong password');
 					}
 					console.log('could not connect');
-				}
+				}					
 			});
 		};
 
@@ -52,6 +53,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			//console.log("Roomlist:");
 			//console.log($scope.roomlist);
 			$scope.roomname = _.keys(roomlist);
+			console.log($scope.roomname);
 			//console.log("Roomnames:");
 			//console.log($scope.roomname);
 		}

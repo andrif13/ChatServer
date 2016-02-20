@@ -14,7 +14,7 @@ var chatApp = angular.module("chatApp", ["ngRoute" ,'ui.bootstrap'])
 			}*/
 		}).when("/rooms/:user/:id", {
 			templateUrl: "/src/room/room.html",
-			controller: "RoomController"
+			controller: "RoomController",
 		}).when("/createroom/:user",{
 			templateUrl: "/src/newroom/createroom.html",
 			controller: "CreateRoomController"

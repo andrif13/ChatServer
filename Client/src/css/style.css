@@ -1,6 +1,6 @@
 #userlist{
 	position: absolute; /*or fixed*/
-    right: 100px;
+    right:320px;
 }
 
 ul{
@@ -48,6 +48,7 @@ ul{
     position: absolute;
     top: 450px;
     left: 50px;
+    margin-top: 50px;
 }
 
 #logincontr{

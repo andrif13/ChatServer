@@ -16,6 +16,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			$scope.messageInRoom = messages;
 		});
 
+
 		socket.on('updateusers', function(room, user, admin){
 			$scope.userlist = _.keys(user);
 			console.log($scope.userlist);

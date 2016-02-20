@@ -6,7 +6,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		socket.emit("users");
 
 		socket.on('userlist', function(userlist){
-			console.log('UserList: ' + userlist);
+			console.log('UserList: ' ,userlist);
 			$scope.users = userlist;
 		});
 
@@ -14,6 +14,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		
 		$scope.roomlist = [];
 		$scope.user = $routeParams.user;
+
 
 		$scope.joinRoom = function(roomname){
 			socket.emit('joinroom', { room: roomname, pass: ''}, function(success, errorMessage){

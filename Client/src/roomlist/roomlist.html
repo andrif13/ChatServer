@@ -1,12 +1,44 @@
-<div>
-	<ul>
-		<label>Chatrooms</label>
-		<li ng-repeat= "room in roomname">
-			<button ng-click="joinRoom(room)">{{room}}</button>
-		</li>
-	</ul>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">ChatServer</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Inbox</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a ng-click= "logOutServer()" ><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+    </ul>
+  </div>
+</nav>
 
-	<button ng-click="createNewRoom()">Create new room</button>
 
-	<button ng-click= "logOutServer()" tyoe="button" >Log Out</button>
+<div class="roomList">
+	<div class="panel panel-info">
+      <div class="panel-heading">Rooms Available</div>
+      	<ul ng-repeat= "room in roomname">
+          	<li ng-click="joinRoom(room)"> {{room}}</li>
+      	</ul>
+      </div>
 </div>
+
+
+<div class="usersAvailable">
+	<div class="panel panel-info">
+      <div class="panel-heading">Users Available</div>
+     	 <ul ng-repeat= "user in users">
+          	<li> {{user}}</li>
+      	</ul>
+      </div>
+</div>
+
+
+<div id="createRoom">
+	<button type="button" class="btn btn-primary" ng-click="createNewRoom()">
+        Create new room
+    </button>
+</div>
+
+

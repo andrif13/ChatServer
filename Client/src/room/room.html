@@ -18,7 +18,10 @@
 <div id="wrapper">
 	<div id="chatbox" scroll-glue>
 			<ul ng-repeat="message in messageInRoom">
-				<li>{{message.nick}} : {{message.message}}	</li>
+				<li>{{message.nick}} : {{message.message}} 	</li>
+			</ul>
+			<ul>
+				<li>{{ ServMessage }}</li>
 			</ul>
 	</div>
 <div id = "privatesend" ng-show = "isPrv">

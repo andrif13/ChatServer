@@ -11,6 +11,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.isPrv = false;
 		$scope.privmessage = "";
 		$scope.GetPrv = false;
+		$scope.ServMessage = "";
 
 
 		var room_obj = {
@@ -51,6 +52,35 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				$location.path("rooms/" + $scope.currUser);
 			}
 		});
+		socket.on('servermessage', function(servMessage, room, servUser){
+			if(room == $scope.roomname){
+				if(servMessage == "part"){
+					$scope.ServMessage = servUser + " has left " + room;
+				}
+				if(servMessage == "quit"){
+					$scope.ServMessage = servUser + " has disconnected";
+				}
+				if(servMessage == "join"){
+					$scope.ServMessage = servUser + " has joined " + room;
+				}
+				if(servMessage == "kick"){
+					$scope.ServMessage = servUser + " has been kicked from " + room;
+				}
+				if(servMessage == "op"){
+					$scope.ServMessage = servUser + " has been made op of " + room;
+				}
+				if(servMessage == "deop"){
+					$scope.ServMessage = servUser + " is no longer op " + room;
+				}
+				if(servMessage == "ban"){
+					$scope.ServMessage = servUser + " has been banned from " + room;
+				}
+				if(servMessage == "unban"){
+					$scope.ServMessage = servUser + " has been unbanned from " + room;
+				}
+
+			}
+		});
 
 		
 		$scope.sendMessage = function(){
@@ -67,10 +97,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		
 		};
 		socket.on('recv_privatemsg', function (sender, rMessage){
-		$scope.GetPrv = true;
-		$scope.recvMessage = rMessage;
-		$scope.fromUser = sender;
-		console.log("RECIVEDMESSAGE", rMessage);
+			$scope.GetPrv = true;
+			$scope.recvMessage = rMessage;
+			$scope.fromUser = sender;
+			console.log("RECIVEDMESSAGE", rMessage);
 		});
 		
 		$scope.dismiss = function(){

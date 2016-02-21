@@ -1,6 +1,5 @@
 
-
-
+<div ng-include="'src/navBar/navView.html'"></div>
 <div id="newRoom">
 	<div>
 		<h3>Create a new chatroom</h3>
@@ -13,12 +12,7 @@
 	</div>
 	<div class="col-xs-8">
 		<input type="text" ng-model="newtopic" class="form-control" placeholder="Room Topic"/>
+		<button id="newChatButton" class="btn btn-primary" ng-click="create()">Create</button>
 	</div>
-
-	<div class="alert alert-danger" role="alert" ng-show="displayError">
-		{{ errorMessage }}
-	</div>
-	<div id="newChat">
-		<button class="btn btn-primary" ng-click="create()">Create</button>
-	</div>
+	<div id="createRoomErrorMessage" data-ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Error:</strong> {{errorMessage}}</div>
 </div>

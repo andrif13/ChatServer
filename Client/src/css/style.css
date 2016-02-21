@@ -3,6 +3,19 @@
     right:320px;
 }
 
+#userlist ul:nth-child(odd){
+    background-color: #ffffff;
+}
+
+#userlist li:nth-child(even){
+    background-color: #d9edf7;
+}
+
+#userlist li:hover{
+    color:#ffffff; 
+    background-color: #337AB7;
+}
+
 ul{
 	list-style-type: none;
 }
@@ -91,24 +104,15 @@ ul{
     height: 100px;
     left: 250px;
 }
-#newChat{
-    position: absolute;
-    bottom: 200px;
-    width: 200px;
-    height: 100px;
-    left: 414px;
+#newChatButton{
+    margin: 1px;
+
 }
 #newRoom{
-    background-color: #ACD8F0;
+    
     position: absolute;
-    padding-left: 400px;
-    padding-top:200px;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-
+    top:200px;
+   left:300px;
 }
 
 #room{

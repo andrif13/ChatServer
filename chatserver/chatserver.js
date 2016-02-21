@@ -166,12 +166,15 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	// when the user disconnects.. perform this
-	socket.on('disconnect', function(){
+	socket.on('dis', function(){
+		console.log("HERNA 66666666666666");
 		if(socket.username) {
 			//If the socket doesn't have a username the client joined and parted without
 			//chosing a username, so we just close the socket without any cleanup.
+
 			for(var room in users[socket.username].channels) {
 				//Remove the user from users/ops lists in the rooms he's currently in.
+				console.log("HERNA 000000000000000000000000000000000000");
 				delete rooms[room].users[socket.username];
 				delete rooms[room].ops[socket.username];
 				io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);

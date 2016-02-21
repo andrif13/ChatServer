@@ -3,10 +3,18 @@
 chatApp.controller("navBarController", ["$scope", "$location", "socket", "$routeParams",
 	function ($scope, $location, socket, $routeParams){
 
+
+
 		$scope.logOutServer = function(){
-			console.log("logOutServer");
-			socket.emit('disconnect');
+			socket.emit("dis",$routeParams.user);
+			console.log("logOutServer" + $routeParams.user);
 			$location.path("/");
 		};
+
+		$scope.homeButton = function(){
+			console.log("HOMEBUTTON");
+			$location.path("/rooms/" + $routeParams.user);
+
+		}
 
 }]);

@@ -1,7 +1,7 @@
 'use strict';
 
-chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$location",
-	function ($scope, $routeParams, socket, $location){
+chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$location", "$timeout",
+	function ($scope, $routeParams, socket, $location, $timeout){
 		$scope.currUser = $routeParams.user;
 		$scope.roomname = $routeParams.id;
 		$scope.isAdmin = false;
@@ -16,7 +16,8 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.isPrv = false;
 		$scope.privmessage = "";
 		$scope.GetPrv = false;
-
+		$scope.showError = false;
+		$scope.doFade = false;
 
 		var room_obj = {
 			room: $scope.roomname,
@@ -29,7 +30,6 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			$scope.messageInRoom = messages;
 
 		});
-
 
 		socket.on('updateusers', function(room, user, admins){
 			$scope.userlist = _.keys(user);
@@ -46,15 +46,27 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 
 		socket.on('kicked', function(room, userKicked, kicker){
 			if($routeParams.user === userKicked && room === $scope.roomname && $routeParams.user !== kicker){
-				$scope.displaySuccess = true;
-				$scope.sucessMessage = "You have been kicked";
-				$location.path("rooms/" + $scope.currUser);
+				$scope.sucessMessage = "You have been kicked from the room!";
+				$scope.showError = false;
+				$scope.doFade = false;
+				$scope.showError = true;
+				$timeout(function(){
+					$scope.doFade = true;
+					$location.path("rooms/" + $scope.currUser);
+				}, 2500);
 			}
 		});
 
 		socket.on('banned', function(room, userBanned, banner){
 			if($routeParams.user === userBanned && room === $scope.roomname && $routeParams.user !== banner){
-				$location.path("rooms/" + $scope.currUser);
+				$scope.sucessMessage = "You have been banned from the room!";
+				$scope.showError = false;
+				$scope.doFade = false;
+				$scope.showError = true;
+				$timeout(function(){
+					$scope.doFade = true;
+					$location.path("rooms/" + $scope.currUser);
+				}, 2500);
 			}
 		});
 		
@@ -64,6 +76,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			console.log('Room: ',room);
 			console.log('Topic: ', topic);
 			console.log('User: ', user);
+		});
+
+		$scope.$on("$destroy", function() {
+			console.log('destroy og roomname er: ', $scope.roomname);
 		});
 
 		$scope.sendMessage = function(){

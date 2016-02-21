@@ -31,7 +31,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 						console.log('wrong password');
 					}
 					console.log('could not connect');
-				}					
+				}
 			});
 		};
 

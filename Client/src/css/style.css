@@ -113,7 +113,17 @@ ul{
 #room{
 
 }
+#unban{
+    position: fixed;
+    right: 300px;
+    bottom: 600px;
+}
+#unbanlist{
+    position: fixed;
+    right: 300px;
+    bottom: 500px;
 
+}
 
 
 

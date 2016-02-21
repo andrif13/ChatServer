@@ -12,6 +12,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.privmessage = "";
 		$scope.GetPrv = false;
 		$scope.ServMessage = "";
+		var bannedList = [];
+		$scope.Getban = false;
+		
+
 
 
 		var room_obj = {
@@ -156,6 +160,8 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				user: user,
 				room: $scope.roomname
 			};
+			bannedList.push(banObj);
+			console.log("Banned list: ", bannedList);
 			socket.emit('ban', banObj, function(success){
 				if(success){
 					console.log(user, " was banned!!");
@@ -174,7 +180,39 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				}
 			});
 		};
-		
+		$scope.unban = function(){
+			console.log("Unbannn");
+			$scope.bannedUserList = _(bannedList).filter(c => c.room = $scope.roomname).map(c => c.user).value();
+			console.log("User list yfir banned user í þessu roomi : ", $scope.bannedUserList);
+			$scope.Getban = true;
+		};
+		$scope.unbanUser = function(user){
+			var unbanObj ={
+				user: user,
+				room: $scope.roomname
+			}
+			for(var i = 0; i < bannedList.length; i++){
+				if(bannedList[i].user === user && bannedList[i].room === $scope.roomname){
+					bannedList.splice(i,1);
+				}
+
+			};
+			console.log("Hvað er eftir í bannedList",bannedList);
+			socket.emit('unban', unbanObj, function(success){
+				if(success){
+					console.log(user, "was unbanned");
+				}
+			});
+			$scope.Getban = false;
+		};
+
+		$scope.deopUser = function(user){
+			var deopObj = {
+				user : user,
+				room : $scope.roomname
+			};
+			socket.emit('deop', deopObj)
+		};
 		$scope.leaveRoom = function(){
 			socket.emit('partroom', $scope.roomname);
 			$location.path('rooms/' + $scope.currUser);

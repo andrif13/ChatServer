@@ -11,6 +11,7 @@
 		<li ng-repeat="user in userlist">{{user}}
 			<button ng-click="kickUser(user)" ng-show="isAdmin">kick</button> 
 			<button ng-click="banUser(user)" ng-show="isAdmin">ban</button>
+			<button ng-click="deopUser(user)" ng-show="isAdmin">deop</button>
 			<button ng-click="opUser(user)" ng-show="isAdmin">op</button>
 			<button type="button" ng-click="privateMessage(user)">PM</button>
 		</li>
@@ -18,12 +19,10 @@
 </div>
 
 <div id="wrapper">
+	<h5>{{ ServMessage }}</h5>
 	<div id="chatbox" scroll-glue>
 			<ul ng-repeat="message in messageInRoom">
 				<li>{{message.nick}} : {{message.message}} 	</li>
-			</ul>
-			<ul>
-				<li>{{ ServMessage }}</li>
 			</ul>
 	</div>
 <div id = "privatesend" ng-show = "isPrv">
@@ -52,6 +51,17 @@
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
 		<button class="btn btn-primary" ng-click="sendMessage()" type="button">Send</button> 
 	</form>
+</div>
+<div id = "unban">
+	<button type="button" ng-click = "unban()">Unban</button>	
+</div>
+<div id = "unbanlist" ng-if = "Getban">
+	<ul>
+		<ling ng-repeat = "user in bannedUserList">{{user}}
+		<button ng-click = "unbanUser(user)"> unban</button>
+		</li>
+	</ul>
+	
 </div>
 
 <div id="leaveroom">

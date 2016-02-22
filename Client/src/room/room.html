@@ -56,9 +56,12 @@
 	<form name="message" action="">
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
 		<button class="btn btn-primary" ng-click="sendMessage()" type="button">Send</button> 
+		<button ng-click="leaveRoom()" class="btn btn-danger" type="button">Leave Room</button>
+		<button ng-click="roomSettings()" ng-show="isAdmin" type="button" class="btn btn-info">Room Settings</button>
 
 	</form>
 </div>
+
 <div id = "unban">
 	<button type="button" ng-click = "unban()">Unban</button>	
 </div>
@@ -72,19 +75,11 @@
 </div>
 
 
-<div id="leaveroom">
-	<button ng-click="leaveRoom()" class="btn btn-danger" type="button">Leave Room</button>
-</div>
-
-<div id="roomsettingsButton">	
-	<button ng-click="roomSettings()" ng-show="isAdmin" type="button">Room Settings</button>
-</div>
-
 <div id="roomsettings" ng-show="show">
 	Room Topic: <input type="text" ng-model="newTopic" placeholder="Topic"/>
 	Room Password <input type="text" ng-model="roomPassword" placeholder="Password"/>
-	<button ng-click="removePassword()">Remove Password</button>
-	<button ng-click="submit()">Submit</button>
+	<button ng-click="removePassword()" class="btn btn-danger">Remove Password</button>
+	<button ng-click="submit()" class="btn btn-success">Submit</button>
 </div>
 
 

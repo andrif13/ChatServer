@@ -201,7 +201,6 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 						$scope.newTopic = "";
 					} else {
 						console.log('Unsuccessfully changed topic');
-
 					}
 				});
 			}
@@ -221,7 +220,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 					} else {
 						console.log('Unsuccessfully changed password');
 					}
-				})
+				});
 			}
 		};
 

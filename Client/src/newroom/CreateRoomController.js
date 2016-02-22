@@ -4,7 +4,7 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 	function ($scope, $routeParams, socket, $window, $location, $timeout){
 		$scope.newRoomName = "";
 		$scope.newRoomPassword = "";
-		$scope.newtopic = "";
+		$scope.newTopic = "";
 		$scope.user = $routeParams.user;
 		$scope.showError = false;
 		$scope.doFade = false;
@@ -34,6 +34,30 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 				var newRoom = {room: $scope.newRoomName, pass: $scope.newRoomPassword};
 				socket.emit('joinroom', newRoom, function (available, error){
 					if(available){
+						if($scope.newRoomPassword !== ""){
+							var passObj = {
+								room: $scope.newRoomName,
+								password: $scope.newRoomPassword
+							};
+							socket.emit('setpassword', passObj, function(sucess){
+								if(sucess){
+									$scope.newRoomPassword = "";
+								} else {
+								}
+							});
+						}
+						if($scope.newTopic !== ""){
+							var topicObj = {
+								room: $scope.newRoomName,
+								topic: $scope.newTopic
+							};
+							socket.emit('settopic', topicObj, function(success){
+								if(success){
+									$scope.newTopic = "";
+								} else {
+								}
+							});
+						}
 						$location.path("/rooms/" + $scope.user + "/" + $scope.newRoomName);
 					} else {
 						$scope.errorMessage = "Something went wrong!!"

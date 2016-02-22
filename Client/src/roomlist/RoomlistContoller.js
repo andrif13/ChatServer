@@ -1,12 +1,17 @@
 'use strict';
 
-chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$routeParams",
-	function ($scope, $location, socket, $routeParams){
+chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$routeParams", "$timeout",
+	function ($scope, $location, socket, $routeParams, $timeout){
 		var pass, a = "";
 		socket.emit("users");
+		var needPassword = false;
+		var chosenRoom = "";
+		var roomObj = "";
+		$scope.enteredPassword = "";
+		$scope.showError = false;
+		$scope.doFade = false;
 
 		socket.on('userlist', function(userlist){
-			//console.log('UserList: ' + userlist);
 			$scope.users = userlist;
 		});
 
@@ -15,27 +20,46 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		$scope.roomlist = [];
 		$scope.user = $routeParams.user;
 
+		$scope.chosenRoom = function(roomname){
+			chosenRoom = roomname;
+		}
 
-		$scope.joinRoom = function(roomname){
-			console.log('HEeeeeeeeeeeeeeeeeeer');
+		$scope.joinRoom = function(){
+			var roomname = chosenRoom;
 			var array = [];
 			array.push(a);
 			console.log(array);
-			var result = array.map(_.property(roomname)) // => [1, 3]
-			console.log(result);
-			if(result.indexOf("") !== 0){
-				
+			var result = array.map(_.property(chosenRoom));
+			if(result[0] !== 0){
+				roomObj = {
+					room: chosenRoom,
+					pass: $scope.enteredPassword
+				};
+			} else {
+				roomObj = {
+					room: chosenRoom,
+					pass: ""
+				};
 			}
-			socket.emit('joinroom', { room: roomname, pass: pass}, function(success, errorMessage){
+			socket.emit('joinroom', roomObj, function(success, errorMessage){
 				if(success){
 					console.log('sucessfully joined a room');
 					$location.path("rooms/" + $scope.user + "/" + roomname);
 				}
 				else{
+					$scope.showError = false;
+					$scope.doFade = false;
+					$scope.showError = true;
 					if(errorMessage === 'banned'){
-						console.log('you are banned from the room');
+						$scope.errorMessage = "you are banned from the room";
+						$timeout(function(){
+							$scope.doFade = true;
+						}, 2500);
 					} else if(errorMessage === 'wrong password'){
-						console.log('wrong password');
+						$scope.errorMessage = "wrong password";
+						$timeout(function(){
+							$scope.doFade = true;
+						}, 2500);
 					}
 					console.log('could not connect');
 				}
@@ -57,5 +81,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			$scope.roomname = _.keys(roomlist);
 			console.log($scope.roomname);
 		}
+			//console.log("Roomnames:");
+			//console.log($scope.roomname);
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);
 }]);

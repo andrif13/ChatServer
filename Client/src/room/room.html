@@ -15,7 +15,9 @@
         <li><a ng-click="kickUser(user)" ng-show="isAdmin">kick</a></li>
     	<li><a ng-click="banUser(user)" ng-show="isAdmin">ban</a></li>
    		<li><a ng-click="opUser(user)" ng-show="isAdmin">op</a></li>
+   		<li><a ng-click="deopUser(user)" ng-show="isAdmin">deop</a></li>
    		<li><a type="button" ng-click="privateMessage(user)">PM></a></li>
+
       </ul>
     </li>
 </ul>
@@ -31,7 +33,7 @@
 				<li>{{message.nick}} : {{message.message}} 	</li>
 			</ul>
 	</div>
-<div id = "privatesend" ng-show = "isPrv">
+<div id = "privatesend" class="col-md-4" ng-show = "isPrv">
 	<div class ="row">
 		<div>
 			<h3 class="text-center"> Sending private message to {{ recvUser }}</h3>
@@ -40,7 +42,7 @@
 		<button type="button" class = "btn btn-primary" ng-click="sendPrvMessage()" > Send</button>
 	</div>
 </div>
-<div id = "privateget" ng-show = "GetPrv">
+<div id = "privateget" class="col-md-4" ng-show = "GetPrv">
 		<div>
 			<h3 class="text-center"> You got a  private message from {{ fromUser }}</h3>
 		</div>
@@ -56,28 +58,26 @@
 	<form name="message" action="">
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
 		<button class="btn btn-primary" ng-click="sendMessage()" type="button">Send</button> 
-		<button ng-click="leaveRoom()" class="btn btn-danger" type="button">Leave Room</button>
-		<button ng-click="roomSettings()" ng-show="isAdmin" type="button" class="btn btn-info">Room Settings</button>
-
 	</form>
-</div>
-
-<div id = "unban">
-	<button type="button" ng-click = "unban()">Unban</button>	
-</div>
-<div id = "unbanlist" ng-if = "Getban">
-	<ul>
-		<ling ng-repeat = "user in bannedUserList">{{user}}
-		<button ng-click = "unbanUser(user)"> unban</button>
+	<div>
+		<button ng-click="leaveRoom()" class="btn btn-danger " type="button">Leave Room</button>
+		<button ng-click="roomSettings()" ng-show="isAdmin" type="button" class="btn btn-info">Room Settings</button>
+		<button type="button" class="btn btn-warning" ng-show="isAdmin" ng-click = "unban()">Unban</button>
+	</div>
+	<div id="unbanlist" ng-show="unbanshow">
+		<ul>
+			<li ng-repeat = "user in bannedUserList" ng-click = "unbanUser(user)">{{user}}
+			<a ng-click = "unbanUser(user)"> unban</a>
 		</li>
 	</ul>
-	
 </div>
+</div>
+
 
 
 <div id="roomsettings" ng-show="show">
 	Room Topic: <input type="text" ng-model="newTopic" placeholder="Topic"/>
-	Room Password <input type="text" ng-model="roomPassword" placeholder="Password"/>
+	Room Password <input type="password" ng-model="roomPassword" placeholder="Password"/>
 	<button ng-click="removePassword()" class="btn btn-danger">Remove Password</button>
 	<button ng-click="submit()" class="btn btn-success">Submit</button>
 </div>

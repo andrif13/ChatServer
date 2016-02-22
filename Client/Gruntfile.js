@@ -31,7 +31,9 @@ module.exports = function(grunt) {
 		  eqnull: true,
 		  node:   true,
 		  undef:  true,
+      //esnext: true,
 		  globals: {
+        chatApp: true,
 		    _:       false,
 		    jQuery:  false,
 		    angular: false,
@@ -52,7 +54,7 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-            'dist/js/Every.min.js': ['src/app.js', 'src/login/loginController.js', 'src/roomlist/RoomlistContoller.js', 'src/room/RoomController.js'] 
+            'dist/js/Every.min.js': ['src/app.js', 'src/login/loginController.js', 'src/navBar/navBarController.js', 'src/roomlist/RoomlistContoller.js','src/newroom/CreateRoomController.js', 'src/room/RoomController.js'] 
             //'src/roomlist/RoomlistContoller.js,', 'src/room/RoomController.js']
           //'dist/js/chatResource.min.js' : 'src/resource/chatResource.js', 'dist/js/RoomController.min.js' : 'src/room/RoomController.js', 'dist/js/RoomlistContoller.min.js' : 'src/roomlist/RoomlistContoller.js', 'dist/js/app.min.js': 'src/app.js'
         }
@@ -83,5 +85,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  
+
+
 };

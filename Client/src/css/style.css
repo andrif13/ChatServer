@@ -128,7 +128,8 @@ ul{
 
 #createRoomErrorMessage, #roomSuccessMessage{
     position: absolute;
-  margin-top: 150px;
+    right:850px;
+    top: 350px;
 }
 
 #room{
@@ -138,7 +139,9 @@ ul{
    
 }
 #unbanlist{
-  
+    position: fixed;
+    
+
 }
 
 #typpi{

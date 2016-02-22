@@ -31,8 +31,9 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		
 		socket.on('updatechat', function(room, messages){
 			//console.log("messages: " + messages);
-			$scope.messageInRoom = messages;
-
+			if(room === $scope.roomname){
+				$scope.messageInRoom = messages;
+			}
 		});
 
 		socket.on('updateusers', function(room, user, admins){
@@ -175,33 +176,40 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			}
 		};
 		$scope.kickUser = function(user){
-			//console.log('User i kickUser: ', user);
-			var kickObj = {
-				user: user,
-				room: $scope.roomname
-			};
-			console.log('kickobj: v');
-			console.log(kickObj.user);
-			socket.emit('kick', kickObj, function(success){
-				if(success){
-					console.log(user, " was kicked!!");
-				}
-			});
+			if(user === $scope.currUser){
+			}
+			else{//console.log('User i kickUser: ', user);
+				var kickObj = {
+					user: user,
+					room: $scope.roomname
+				};
+				console.log('kickobj: v');
+				console.log(kickObj.user);
+				socket.emit('kick', kickObj, function(success){
+					if(success){
+						console.log(user, " was kicked!!");
+					}
+				});
+			};4
 		};
 
 		$scope.banUser = function(user){
-			var banObj = {
-				user: user,
-				room: $scope.roomname
+			if(user === $scope.currUser){
+			}
+			else{
+				var banObj = {
+					user: user,
+					room: $scope.roomname
+				};
+				bannedList.push(banObj);
+				console.log("Banned list: ", bannedList);
+				socket.emit('ban', banObj, function(success){
+					if(success){
+						console.log(user, " was banned!!");
+					}
+				});
 			};
-			bannedList.push(banObj);
-			console.log("Banned list: ", bannedList);
-			socket.emit('ban', banObj, function(success){
-				if(success){
-					console.log(user, " was banned!!");
-				}
-			});
-		};
+		}	
 
 		$scope.opUser = function(user){
 			var opObj = {

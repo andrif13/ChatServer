@@ -4,6 +4,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 	function ($scope, $location, socket, $routeParams){
 		var pass = "";
 		socket.emit("users");
+		$scope.currUser = $routeParams.user;
 
 		socket.on('userlist', function(userlist){
 			//console.log('UserList: ' + userlist);

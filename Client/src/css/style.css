@@ -131,13 +131,11 @@ ul{
   margin-top: 150px;
 }
 
-#room{
 
-}
-#unban{
-   
-}
 #unbanlist{
+   position: absolute;
+    top: 560px;
+    left: 250px; 
   
 }
 

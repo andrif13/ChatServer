@@ -56,23 +56,23 @@
 	<form name="message" action="">
 	    <input name="usermsg" type="text" ng-model="newmessage" focus="{{usermsg}}"size="63" />	
 		<button class="btn btn-primary" ng-click="sendMessage()" type="button">Send</button> 
-		<button ng-click="leaveRoom()" class="btn btn-danger" type="button">Leave Room</button>
-		<button ng-click="roomSettings()" ng-show="isAdmin" type="button" class="btn btn-info">Room Settings</button>
-
 	</form>
+	<div>
+		<button ng-click="leaveRoom()" class="btn btn-danger " type="button">Leave Room</button>
+		<button ng-click="roomSettings()" ng-show="isAdmin" type="button" class="btn btn-info">Room Settings</button>
+		<button type="button" class="btn btn-warning" ng-show="isAdmin" ng-click = "unban()">Unban</button>
+	</div>
 </div>
 
-<div id = "unban">
-	<button type="button" ng-click = "unban()">Unban</button>	
-</div>
-<div id = "unbanlist" ng-if = "Getban">
-	<ul>
-		<ling ng-repeat = "user in bannedUserList">{{user}}
-		<button ng-click = "unbanUser(user)"> unban</button>
+
+<div id="unbanlist" ng-show="unbanshow">
+		<ul>
+			<li ng-repeat = "user in bannedUserList" ng-click = "unbanUser(user)">{{user}}
+			<a ng-click = "unbanUser(user)"> unban</a>
 		</li>
 	</ul>
-	
 </div>
+
 
 
 <div id="roomsettings" ng-show="show">

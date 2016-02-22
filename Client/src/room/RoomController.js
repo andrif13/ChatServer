@@ -9,6 +9,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.adminsInRoom = "";
 		$scope.glued = true;
 		$scope.show = false;
+		$scope.unbanshow = false;
 		$scope.newTopic = "";
 		$scope.topic = "";
 		$scope.roomPassword = "";
@@ -18,7 +19,6 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		$scope.GetPrv = false;
 		$scope.ServMessage = "";
 		var bannedList = [];
-		$scope.Getban = false;
 		$scope.showError = false;
 		$scope.doFade = false;
 
@@ -136,6 +136,8 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				$scope.show = false;
 			}
 		}
+
+
 		socket.on('recv_privatemsg', function (sender, rMessage){
 			$scope.GetPrv = true;
 			$scope.recvMessage = rMessage;
@@ -216,9 +218,14 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		};
 		$scope.unban = function(){
 			console.log("Unbannn");
+			counter++;
+			if(counter%2===0){
+				$scope.unbanshow = true;
+			} else {
+				$scope.unbanshow = false;
+			}
 			$scope.bannedUserList = _(bannedList).filter(c => c.room = $scope.roomname).map(c => c.user).value();
 			console.log("User list yfir banned user í þessu roomi : ", $scope.bannedUserList);
-			$scope.Getban = true;
 		};
 		$scope.unbanUser = function(user){
 			var unbanObj ={
@@ -237,7 +244,6 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 					console.log(user, "was unbanned");
 				}
 			});
-			$scope.Getban = false;
 		};
 
 		$scope.deopUser = function(user){

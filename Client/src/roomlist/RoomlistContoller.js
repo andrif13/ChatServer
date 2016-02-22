@@ -6,9 +6,17 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		socket.emit("users");
 
 		socket.on('userlist', function(userlist){
-			//console.log('UserList: ' + userlist);
+			console.log('UserList: ' + userlist);
 			$scope.users = userlist;
 		});
+
+		$scope.clickUser = function(){
+			socket.emit("users");
+				socket.on('userlist', function(userlist){
+			console.log('UserList: ' + userlist);
+			$scope.users = userlist;
+		});
+		}
 
 		socket.emit("rooms");
 		

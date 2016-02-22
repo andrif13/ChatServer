@@ -128,10 +128,16 @@ ul{
 
 #createRoomErrorMessage, #roomSuccessMessage{
     position: absolute;
-    right:850px;
-    top: 350px;
+  margin-top: 150px;
 }
 
 #room{
 
 }
+#unban{
+   
+}
+#unbanlist{
+  
+}
+

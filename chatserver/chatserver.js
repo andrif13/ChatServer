@@ -203,6 +203,7 @@ io.sockets.on('connection', function (socket) {
 			//Update user list for room.
 			io.sockets.emit('updateusers', kickObj.room, rooms[kickObj.room].users, rooms[kickObj.room].ops);
 			fn(true);
+			io.sockets.emit('servermessage', "kick", kickObj.room, kickObj.user);
 		}
 		else {
 			fn(false); // Send back failed, debugging..
@@ -222,6 +223,7 @@ io.sockets.on('connection', function (socket) {
 			//Update user list for room.
 			io.sockets.emit('updateusers', opObj.room, rooms[opObj.room].users, rooms[opObj.room].ops);
 			fn(true);
+			io.sockets.emit('servermessage', "op", opObj.room, opObj.user);
 		}
 		else {
 			fn(false); // Send back failed, debugging..
@@ -242,6 +244,7 @@ io.sockets.on('connection', function (socket) {
 			//Update user list for room.
 			io.sockets.emit('updateusers', deopObj.room, rooms[deopObj.room].users, rooms[deopObj.room].ops);
 			fn(true);
+			io.sockets.emit('servermessage', "deop", deopObj.room, deopObj.user);
 		}
 		else {
 			fn(false); // Send back failed, debugging..
@@ -259,6 +262,8 @@ io.sockets.on('connection', function (socket) {
 			io.sockets.emit('banned', banObj.room, banObj.user, socket.username);
 			io.sockets.emit('updateusers', banObj.room, rooms[banObj.room].users, rooms[banObj.room].ops);
 			fn(true);
+			io.sockets.emit('servermessage', "ban", banObj.room, banObj.user);
+
 		}
 		fn(false);
 	});
@@ -269,6 +274,7 @@ io.sockets.on('connection', function (socket) {
 			//Remove the user from the room ban list.
 			delete rooms[unbanObj.room].banned[unbanObj.user];
 			fn(true);
+			io.sockets.emit('servermessage', "unban", unbanObj.room, unbanObj.user);
 		}
 		fn(false);
 	});

@@ -15,6 +15,6 @@ chatApp.controller("navBarController", ["$scope", "$location", "socket", "$route
 			console.log("HOMEBUTTON");
 			$location.path("/rooms/" + $routeParams.user);
 
-		}
+		};
 
 }]);

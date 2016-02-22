@@ -5,7 +5,7 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedI
 	console.log('Loggedin:', LoggedIn);
 	$scope.user = "";
 	$scope.errorMessage = "";
-	$scope.taken = ""
+	$scope.taken = "";
 	$scope.showError = false;
 	$scope.doFade = false;
 
@@ -25,7 +25,7 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedI
 				if (available){
 					$location.path("rooms/" + $scope.user);
 				} else{
-					$scope.errorMessage = "This User is already taken choose another one !"
+					$scope.errorMessage = "This User is already taken choose another one !";
 					$timeout(function(){
 						$scope.doFade = true;
 					}, 2500);

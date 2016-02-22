@@ -25,7 +25,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 
 		var room_obj = {
 			room: $scope.roomname,
-		}
+		};
 
 		socket.emit('hasjoined', room_obj);
 		
@@ -117,7 +117,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		});
 
 		$scope.sendMessage = function(){
-			if($scope.newmessage == ""){
+			if($scope.newmessage === ""){
 			} else {
 				console.log('sendMessage');	
 				var data = {
@@ -136,7 +136,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			} else {
 				$scope.show = false;
 			}
-		}
+		};
 
 
 		socket.on('recv_privatemsg', function (sender, rMessage){
@@ -160,7 +160,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				console.log("inní drasli");
 				$scope.isPrv = true;
 				$scope.sendPrvMessage = function(){
-					if($scope.privmessage == ""){
+					if($scope.privmessage === ""){
 						console.log("auttt");
 					}
 					else{
@@ -170,10 +170,10 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 								message : $scope.privmessage
 							};
 							console.log(data);
-							socket.emit('privatemsg', data)
+							socket.emit('privatemsg', data);
 							$scope.isPrv = false;
 					}
-				}
+				};
 				
 			}
 		};
@@ -192,7 +192,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 						console.log(user, " was kicked!!");
 					}
 				});
-			};4
+			}
 		};
 
 		$scope.banUser = function(user){
@@ -210,8 +210,8 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 						console.log(user, " was banned!!");
 					}
 				});
-			};
-		}	
+			}
+		};
 
 		$scope.opUser = function(user){
 			var opObj = {
@@ -239,13 +239,13 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 			var unbanObj ={
 				user: user,
 				room: $scope.roomname
-			}
+			};
 			for(var i = 0; i < bannedList.length; i++){
 				if(bannedList[i].user === user && bannedList[i].room === $scope.roomname){
 					bannedList.splice(i,1);
 				}
 
-			};
+			}
 			console.log("Hvað er eftir í bannedList",bannedList);
 			socket.emit('unban', unbanObj, function(success){
 				if(success){
@@ -259,7 +259,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				user : user,
 				room : $scope.roomname
 			};
-			socket.emit('deop', deopObj)
+			socket.emit('deop', deopObj);
 		};
 		$scope.leaveRoom = function(){
 			socket.emit('partroom', $scope.roomname);
@@ -302,7 +302,7 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 					} else {
 						console.log('Unsuccessfully changed password');
 					}
-				})
+				});
 			}
 		};
 
@@ -316,6 +316,6 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 				} else {
 					console.log('Unsuccessfully removed password');
 				}
-			})
+			});
 		};
 }]);

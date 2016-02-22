@@ -52,6 +52,6 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			console.log($scope.roomname);
 			//console.log("Roomnames:");
 			//console.log($scope.roomname);
-		}
+		};
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);
 }]);

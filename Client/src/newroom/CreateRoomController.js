@@ -8,7 +8,7 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 		$scope.user = $routeParams.user;
 		$scope.showError = false;
 		$scope.doFade = false;
-		socket.emit("rooms")
+		socket.emit("rooms");
 		var roomList = "";
 		socket.on("roomlist", function(roomlist){
 			console.log("rooms ", _.keys(roomlist));
@@ -20,12 +20,12 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 			$scope.showError = true;
 			var found = $.inArray($scope.newRoomName, roomList);
 			if($scope.newRoomName === ""){
-				$scope.errorMessage = "You have to put in some name of the room!!"
+				$scope.errorMessage = "You have to put in some name of the room!!";
 				$timeout(function(){
 					$scope.doFade = true;
 				}, 2500);
 			} else if (found !== -1){
-				$scope.errorMessage = "There is room already named that!!"
+				$scope.errorMessage = "There is room already named that!!";
 				$timeout(function(){
 					$scope.doFade = true;
 				}, 2500);
@@ -36,7 +36,7 @@ chatApp.controller("CreateRoomController", ["$scope", "$routeParams", "socket", 
 					if(available){
 						$location.path("/rooms/" + $scope.user + "/" + $scope.newRoomName);
 					} else {
-						$scope.errorMessage = "Something went wrong!!"
+						$scope.errorMessage = "Something went wrong!!";
 						$timeout(function(){
 							$scope.doFade = true;
 						}, 2500);

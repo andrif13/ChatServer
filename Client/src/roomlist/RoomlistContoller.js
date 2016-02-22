@@ -22,7 +22,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 
 		$scope.chosenRoom = function(roomname){
 			chosenRoom = roomname;
-		}
+		};
 
 		$scope.joinRoom = function(){
 			var roomname = chosenRoom;
@@ -80,7 +80,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			$scope.roomlist = roomlist;
 			$scope.roomname = _.keys(roomlist);
 			console.log($scope.roomname);
-		}
+		};
 			//console.log("Roomnames:");
 			//console.log($scope.roomname);
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);

@@ -30,22 +30,24 @@ chatApp.controller("RoomController", ["$scope", "$routeParams", "socket", "$loca
 		socket.emit('hasjoined', room_obj);
 		
 		socket.on('updatechat', function(room, messages){
-			//console.log("messages: " + messages);
-			$scope.messageInRoom = messages;
-
+			if(room === $scope.roomname){
+				$scope.messageInRoom = messages;
+			}
 		});
 
 		socket.on('updateusers', function(room, user, admins){
-			$scope.userlist = _.keys(user);
-			$scope.adminsInRoom = admins;
-			if(admins[$scope.currUser] === $scope.currUser){
-				$scope.isAdmin = true;
-				console.log($scope.currUser, " is Admin in this room");
-			} else {
-				$scope.isAdmin = false;
-				console.log($scope.currUser, " is NOT Admin in this room");
+			if(room === $scope.roomname){
+				$scope.userlist = _.keys(user);
+				$scope.adminsInRoom = admins;
+				if(admins[$scope.currUser] === $scope.currUser){
+					$scope.isAdmin = true;
+					console.log($scope.currUser, " is Admin in this room");
+				} else {
+					$scope.isAdmin = false;
+					console.log($scope.currUser, " is NOT Admin in this room");
+				}
+				console.log("OPS: ", $scope.adminsInRoom);
 			}
-			console.log("OPS: ", $scope.adminsInRoom);
 		});
 
 		socket.on('kicked', function(room, userKicked, kicker){

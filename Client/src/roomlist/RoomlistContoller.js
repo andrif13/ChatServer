@@ -2,7 +2,7 @@
 
 chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$routeParams",
 	function ($scope, $location, socket, $routeParams){
-		var pass = "";
+		var pass, a = "";
 		socket.emit("users");
 
 		socket.on('userlist', function(userlist){
@@ -17,8 +17,15 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 
 
 		$scope.joinRoom = function(roomname){
-			var pass = prompt("Enter room password");
-			console.log(pass);
+			console.log('HEeeeeeeeeeeeeeeeeeer');
+			var array = [];
+			array.push(a);
+			console.log(array);
+			var result = array.map(_.property(roomname)) // => [1, 3]
+			console.log(result);
+			if(result.indexOf("") !== 0){
+				
+			}
 			socket.emit('joinroom', { room: roomname, pass: pass}, function(success, errorMessage){
 				if(success){
 					console.log('sucessfully joined a room');
@@ -44,13 +51,11 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		var functionToBeCalledWhenRoomListChanges = function(roomlist){
 			console.log('-----------------------------');
 			console.log(roomlist);
+			a = _.mapValues(roomlist, 'password');
+			console.log('A: ', a);
 			$scope.roomlist = roomlist;
-			//console.log("Roomlist:");
-			//console.log($scope.roomlist);
 			$scope.roomname = _.keys(roomlist);
 			console.log($scope.roomname);
-			//console.log("Roomnames:");
-			//console.log($scope.roomname);
 		}
 		socket.on("roomlist", functionToBeCalledWhenRoomListChanges);
 }]);

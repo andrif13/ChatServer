@@ -2,9 +2,6 @@
 
 chatApp.controller("navBarController", ["$scope", "$location", "socket", "$routeParams",
 	function ($scope, $location, socket, $routeParams){
-
-
-
 		$scope.logOutServer = function(){
 			socket.emit("dis",$routeParams.user);
 			console.log("logOutServer" + $routeParams.user);

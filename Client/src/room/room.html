@@ -15,6 +15,7 @@
         <li><a ng-click="kickUser(user)" ng-show="isAdmin">kick</a></li>
     	<li><a ng-click="banUser(user)" ng-show="isAdmin">ban</a></li>
    		<li><a ng-click="opUser(user)" ng-show="isAdmin">op</a></li>
+   		<li><a ng-click="deopUser(user)" ng-show="isAdmin">deop</a></li>
    		<li><a type="button" ng-click="privateMessage(user)">PM></a></li>
       </ul>
     </li>
@@ -31,7 +32,7 @@
 				<li>{{message.nick}} : {{message.message}} 	</li>
 			</ul>
 	</div>
-<div id = "privatesend" ng-show = "isPrv">
+<div id = "privatesend" class="col-md-4" ng-show = "isPrv">
 	<div class ="row">
 		<div>
 			<h3 class="text-center"> Sending private message to {{ recvUser }}</h3>
@@ -40,7 +41,7 @@
 		<button type="button" class = "btn btn-primary" ng-click="sendPrvMessage()" > Send</button>
 	</div>
 </div>
-<div id = "privateget" ng-show = "GetPrv">
+<div id = "privateget" class="col-md-4" ng-show = "GetPrv">
 		<div>
 			<h3 class="text-center"> You got a  private message from {{ fromUser }}</h3>
 		</div>

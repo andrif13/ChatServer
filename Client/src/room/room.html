@@ -64,15 +64,13 @@
 		<button ng-click="roomSettings()" ng-show="isAdmin" type="button" class="btn btn-info">Room Settings</button>
 		<button type="button" class="btn btn-warning" ng-show="isAdmin" ng-click = "unban()">Unban</button>
 	</div>
-</div>
-
-
-<div id="unbanlist" ng-show="unbanshow">
+	<div id="unbanlist" ng-show="unbanshow">
 		<ul>
 			<li ng-repeat = "user in bannedUserList" ng-click = "unbanUser(user)">{{user}}
 			<a ng-click = "unbanUser(user)"> unban</a>
 		</li>
 	</ul>
+</div>
 </div>
 
 

@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 		  eqnull: true,
 		  node:   true,
 		  undef:  true,
-      esnext: true,
+      //esnext: true,
 		  globals: {
         chatApp: true,
 		    _:       false,

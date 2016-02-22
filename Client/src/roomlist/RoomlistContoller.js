@@ -4,7 +4,6 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 	function ($scope, $location, socket, $routeParams){
 		var pass = "";
 		socket.emit("users");
-		$scope.currUser = $routeParams.user;
 
 		socket.on('userlist', function(userlist){
 			//console.log('UserList: ' + userlist);
@@ -14,7 +13,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 		socket.emit("rooms");
 		
 		$scope.roomlist = [];
-		$scope.user = $routeParams.user;
+		var user = $routeParams.user;
 
 
 		$scope.joinRoom = function(roomname){
@@ -23,7 +22,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 			socket.emit('joinroom', { room: roomname, pass: pass}, function(success, errorMessage){
 				if(success){
 					console.log('sucessfully joined a room');
-					$location.path("rooms/" + $scope.user + "/" + roomname);
+					$location.path("rooms/" + user + "/" + roomname);
 				}
 				else{
 					if(errorMessage === 'banned'){
@@ -38,7 +37,7 @@ chatApp.controller("RoomlistController", ["$scope", "$location", "socket", "$rou
 
 		$scope.createNewRoom = function(){
 			//console.log('createNewRoom');
-			$location.path("createroom/" + $scope.user);
+			$location.path("createroom/" + user);
 		};
 
 

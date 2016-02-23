@@ -54,7 +54,7 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-            'dist/js/Every.min.js': ['src/app.js','src/services/socket.js', 'src/login/loginController.js', 'src/navBar/navBarController.js', 'src/roomlist/RoomlistContoller.js','src/newroom/CreateRoomController.js', 'src/room/RoomController.js']
+            'dist/js/Every.min.js': ['src/app.js', 'src/login/loginController.js', 'src/navBar/navBarController.js', 'src/roomlist/RoomlistContoller.js','src/newroom/CreateRoomController.js', 'src/room/RoomController.js']
             //'src/login/loginController.js', 'src/navBar/navBarController.js', 'src/roomlist/RoomlistContoller.js','src/newroom/CreateRoomController.js', 'src/room/RoomController.js'
         }
       }

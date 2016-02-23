@@ -17,16 +17,3 @@ var chatApp = angular.module("chatApp", ["ngRoute" ,'ui.bootstrap'])
 			controller: "CreateRoomController"
 		});
 	}]);
-chatApp.value('LoggedIn');
-
-var checkAuthOfUser = function($q, LoggedIn, $location){
-	console.log('Loggedin_cjel: ', LoggedIn);
-	var deferred = $q.defer();
-	if(LoggedIn === undefined){
-		deferred.reject();
-		$location.path("/");
-	} else {
-		deferred.resolve(true);
-	}
-	return deferred.promise;
-};

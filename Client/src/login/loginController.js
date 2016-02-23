@@ -1,8 +1,7 @@
 "use strict";
 
-chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedIn", "$timeout",
-	function ($scope, $location, socket, LoggedIn, $timeout){
-	console.log('Loggedin:', LoggedIn);
+chatApp.controller("LoginController", ["$scope", "$location", "socket", "$timeout",
+	function ($scope, $location, socket, $timeout){
 	$scope.user = "";
 	$scope.errorMessage = "";
 	$scope.taken = "";
@@ -10,7 +9,6 @@ chatApp.controller("LoginController", ["$scope", "$location", "socket", "LoggedI
 	$scope.doFade = false;
 
 	$scope.onLogin = function onLogin(path){
-		LoggedIn = $scope.user;
 		//console.log('Loggedin: ',LoggedIn);
 		$scope.showError = false;
 		$scope.doFade = false;
